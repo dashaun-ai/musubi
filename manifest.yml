@@ -1,0 +1,32 @@
+# Local-development MVP: configuration and secrets intentionally live in the app manifest.
+# Deferred hardening: move shared config to Spring Cloud Config Server and secrets/signing keys to Vault.
+applications:
+  - name: musubi
+    path: target/musubi-0.1.0-SNAPSHOT.jar
+    buildpacks: [java_buildpack]
+    stack: cflinuxfs5
+    memory: 768M
+    routes:
+      - route: musubi.apps.127-0-0-1.nip.io
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health/readiness
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 25.+ } }'
+      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
+      MUSUBI_BROKER_USERNAME: musubi
+      MUSUBI_BROKER_PASSWORD: musubi-dev-secret
+      MUSUBI_POSTGRESQL_HOST: postgresql.kansei-services.svc.cluster.local
+      MUSUBI_POSTGRESQL_PORT: 5432
+      MUSUBI_POSTGRESQL_DATABASE: kansei_events
+      MUSUBI_POSTGRESQL_USERNAME: kansei
+      MUSUBI_POSTGRESQL_PASSWORD: kansei
+      MUSUBI_RABBITMQ_HOST: rabbitmq.kansei-services.svc.cluster.local
+      MUSUBI_RABBITMQ_PORT: 5672
+      MUSUBI_RABBITMQ_USERNAME: kansei
+      MUSUBI_RABBITMQ_PASSWORD: kansei
+      MUSUBI_REDIS_HOST: redis.kansei-services.svc.cluster.local
+      MUSUBI_REDIS_PORT: 6379
+      MUSUBI_LGTM_HOST: lgtm.kansei-services.svc.cluster.local
+      MUSUBI_LGTM_OTLP_HTTP_PORT: 4318
+      MUSUBI_LGTM_OTLP_GRPC_PORT: 4317
+      MUSUBI_GRAFANA_URL: https://grafana.127-0-0-1.nip.io
