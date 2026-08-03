@@ -10,6 +10,12 @@ applications:
       - route: musubi.apps.127-0-0-1.nip.io
     health-check-type: http
     health-check-http-endpoint: /actuator/health/readiness
+    # Cloud Foundry allows the liveness probe 1 second by default, and kills the instance when it is
+    # missed. Readiness answers in 13-130ms at idle, so that budget looks generous until a GC pause or
+    # one slow backing service lands on top of it — which is how kansei was SIGKILLed on 2026-08-02
+    # ("timed out after 1.00 seconds", then "Exit status 137"). Ten seconds still catches a genuinely
+    # wedged app within one interval; it just stops treating a hiccup as a death.
+    health-check-invocation-timeout: 10
     env:
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 25.+ } }'
       JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
