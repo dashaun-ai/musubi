@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: musubi
+  config:
+    import: optional:configserver:${SASHIZU_URL:http://localhost:8888}
   cloud:
     openservicebroker:
       # The local CAPI release sends OSBAPI 2.15. SCOSB validates this header exactly.
