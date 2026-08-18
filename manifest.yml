@@ -2,7 +2,7 @@
 # Non-secret runtime configuration lives in dashaun-ai/okite.
 applications:
   - name: musubi
-    path: target/musubi-0.1.0-SNAPSHOT.jar
+    path: target/musubi-3.0.0-SNAPSHOT.jar
     buildpacks: [java_buildpack]
     stack: cflinuxfs5
     memory: 768M
