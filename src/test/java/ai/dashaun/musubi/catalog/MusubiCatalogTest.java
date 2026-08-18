@@ -8,21 +8,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 class MusubiCatalogTest {
 
     @Test
-    void advertisesTheFourKanseiDevelopmentServices() {
+    void advertisesInfrastructureAndBucketSpecificGaragePlans() {
         Catalog catalog = new MusubiCatalog().catalog();
 
         assertThat(catalog.getServiceDefinitions())
                 .extracting(service -> service.getName())
-                .containsExactly("postgresql", "rabbitmq", "redis", "grafana-lgtm");
+                .containsExactly("postgresql", "rabbitmq", "redis", "grafana-lgtm", "garage");
         assertThat(catalog.getServiceDefinitions())
                 .allSatisfy(service -> {
                     assertThat(service.isBindable()).isTrue();
-                    assertThat(service.getPlans()).singleElement()
-                            .satisfies(plan -> {
-                                assertThat(plan.getName()).isEqualTo("dev");
-                                assertThat(plan.isFree()).isTrue();
-                            });
+                    assertThat(service.getPlans()).allSatisfy(plan -> assertThat(plan.isFree()).isTrue());
                 });
+        assertThat(catalog.getServiceDefinitions().getLast().getPlans())
+                .extracting(plan -> plan.getName())
+                .containsExactly("run-artifacts", "browser-evidence", "encrypted-backups");
     }
 
     @Test

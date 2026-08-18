@@ -36,6 +36,21 @@ musubi:
       otlp-http-port: ${MUSUBI_LGTM_OTLP_HTTP_PORT:4318}
       otlp-grpc-port: ${MUSUBI_LGTM_OTLP_GRPC_PORT:4317}
       grafana-url: ${MUSUBI_GRAFANA_URL:https://grafana.127-0-0-1.nip.io}
+    garage:
+      endpoint: ${MUSUBI_GARAGE_ENDPOINT:http://juice:3900}
+      region: ${MUSUBI_GARAGE_REGION:garage}
+      run-artifacts:
+        name: ${MUSUBI_GARAGE_RUN_ARTIFACTS_BUCKET:kansei-run-artifacts}
+        access-key-id: ${MUSUBI_GARAGE_RUN_ARTIFACTS_ACCESS_KEY:dev-run-artifacts}
+        secret-access-key: ${MUSUBI_GARAGE_RUN_ARTIFACTS_SECRET_KEY:dev-run-artifacts-secret}
+      browser-evidence:
+        name: ${MUSUBI_GARAGE_BROWSER_EVIDENCE_BUCKET:kansei-browser-evidence}
+        access-key-id: ${MUSUBI_GARAGE_BROWSER_EVIDENCE_ACCESS_KEY:dev-browser-evidence}
+        secret-access-key: ${MUSUBI_GARAGE_BROWSER_EVIDENCE_SECRET_KEY:dev-browser-evidence-secret}
+      encrypted-backups:
+        name: ${MUSUBI_GARAGE_BACKUPS_BUCKET:kansei-encrypted-backups}
+        access-key-id: ${MUSUBI_GARAGE_BACKUPS_ACCESS_KEY:dev-backups}
+        secret-access-key: ${MUSUBI_GARAGE_BACKUPS_SECRET_KEY:dev-backups-secret}
 
 management:
   endpoints:

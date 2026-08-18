@@ -33,7 +33,9 @@ public class MusubiServiceBindingService implements ServiceInstanceBindingServic
     @Override
     public Mono<CreateServiceInstanceBindingResponse> createServiceInstanceBinding(
             CreateServiceInstanceBindingRequest request) {
-        Map<String, Object> credentials = credentialsByServiceId.get(request.getServiceDefinitionId());
+        Map<String, Object> credentials = credentialsByServiceId.get(
+                request.getServiceDefinitionId() + ":" + request.getPlanId());
+        if (credentials == null) credentials = credentialsByServiceId.get(request.getServiceDefinitionId());
         if (credentials == null) {
             return Mono.error(new IllegalArgumentException(
                     "Unknown Musubi service definition: " + request.getServiceDefinitionId()));

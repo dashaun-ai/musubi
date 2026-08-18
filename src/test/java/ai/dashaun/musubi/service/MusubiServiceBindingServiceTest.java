@@ -9,6 +9,8 @@ import java.util.Map;
 
 import static ai.dashaun.musubi.catalog.MusubiCatalog.POSTGRESQL_PLAN_ID;
 import static ai.dashaun.musubi.catalog.MusubiCatalog.POSTGRESQL_SERVICE_ID;
+import static ai.dashaun.musubi.catalog.MusubiCatalog.GARAGE_BROWSER_EVIDENCE_PLAN_ID;
+import static ai.dashaun.musubi.catalog.MusubiCatalog.GARAGE_SERVICE_ID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MusubiServiceBindingServiceTest {
@@ -53,6 +55,18 @@ class MusubiServiceBindingServiceTest {
         assertThat(repeated.isBindingExisted()).isTrue();
         assertThat(afterDelete.isBindingExisted()).isFalse();
     }
+
+	@Test void returnsCredentialsForTheExactGarageBucketPlan() {
+		Map<String,Object> evidence=Map.of("bucket","kansei-browser-evidence","endpoint","http://juice:3900");
+		MusubiServiceBindingService service=new MusubiServiceBindingService(Map.of(
+				GARAGE_SERVICE_ID+":"+GARAGE_BROWSER_EVIDENCE_PLAN_ID,evidence));
+		CreateServiceInstanceBindingRequest request=CreateServiceInstanceBindingRequest.builder()
+				.serviceInstanceId("evidence-1").bindingId("binding-1").serviceDefinitionId(GARAGE_SERVICE_ID)
+				.planId(GARAGE_BROWSER_EVIDENCE_PLAN_ID).build();
+		CreateServiceInstanceAppBindingResponse response=(CreateServiceInstanceAppBindingResponse)
+				service.createServiceInstanceBinding(request).block();
+		assertThat(response.getCredentials()).containsEntry("bucket","kansei-browser-evidence");
+	}
 
     private static CreateServiceInstanceBindingRequest bindingRequest() {
         return CreateServiceInstanceBindingRequest.builder()

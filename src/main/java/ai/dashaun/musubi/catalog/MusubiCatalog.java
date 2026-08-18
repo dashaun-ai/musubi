@@ -19,6 +19,10 @@ public class MusubiCatalog {
     public static final String REDIS_PLAN_ID = "7aba5a6f-42a2-4fd2-aca5-1fd739e47190";
     public static final String LGTM_SERVICE_ID = "881c8337-663f-46ac-88fd-b250c136cd6f";
     public static final String LGTM_PLAN_ID = "ad1ce5ff-de74-493c-b0b1-653fe368bc23";
+    public static final String GARAGE_SERVICE_ID = "0d710b3a-7c33-4f0a-9804-f62dbc9797c9";
+    public static final String GARAGE_RUN_ARTIFACTS_PLAN_ID = "5376aebd-5db3-49ec-bada-b3e896011b81";
+    public static final String GARAGE_BROWSER_EVIDENCE_PLAN_ID = "2889a6ee-bceb-494c-a1c2-289dc81303cd";
+    public static final String GARAGE_ENCRYPTED_BACKUPS_PLAN_ID = "46d72de0-0bd6-4e22-b9b3-41ab56af053c";
 
     @Bean
     public Catalog catalog() {
@@ -31,8 +35,23 @@ public class MusubiCatalog {
                         service(REDIS_SERVICE_ID, REDIS_PLAN_ID, "redis",
                                 "Redis Stack for Kansei memory and vector search", "redis", "key-value"),
                         service(LGTM_SERVICE_ID, LGTM_PLAN_ID, "grafana-lgtm",
-                                "Shared Grafana LGTM OpenTelemetry backend", "lgtm", "observability"))
+                                "Shared Grafana LGTM OpenTelemetry backend", "lgtm", "observability"),
+                        garage())
                 .build();
+    }
+
+    private static ServiceDefinition garage() {
+        return ServiceDefinition.builder().id(GARAGE_SERVICE_ID).name("garage")
+                .description("Garage S3-compatible encrypted artifact storage").bindable(true)
+                .tags("garage", "s3", "object-storage")
+                .plans(garagePlan(GARAGE_RUN_ARTIFACTS_PLAN_ID, "run-artifacts", "90-day run artifacts"),
+                        garagePlan(GARAGE_BROWSER_EVIDENCE_PLAN_ID, "browser-evidence", "Seven-day browser evidence"),
+                        garagePlan(GARAGE_ENCRYPTED_BACKUPS_PLAN_ID, "encrypted-backups", "Encrypted recovery backups"))
+                .build();
+    }
+
+    private static Plan garagePlan(String id, String name, String description) {
+        return Plan.builder().id(id).name(name).description(description).free(true).build();
     }
 
     private static ServiceDefinition service(

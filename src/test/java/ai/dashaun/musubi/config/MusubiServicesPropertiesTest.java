@@ -15,7 +15,7 @@ class MusubiServicesPropertiesTest {
                 new MusubiServicesProperties.PostgreSql("postgresql", 5432, "events", "kansei", "secret"),
                 new MusubiServicesProperties.RabbitMq("rabbitmq", 5672, "kansei", "secret", "/"),
                 new MusubiServicesProperties.Redis("redis", 6379),
-                new MusubiServicesProperties.Lgtm("lgtm", 4318, 4317, "https://grafana.example"));
+                new MusubiServicesProperties.Lgtm("lgtm", 4318, 4317, "https://grafana.example"), null);
 
         Map<String, Object> credentials = properties.credentialsByServiceId().get(RABBITMQ_SERVICE_ID);
 
