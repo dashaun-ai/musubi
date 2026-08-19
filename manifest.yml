@@ -18,6 +18,12 @@ applications:
       JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
       SPRING_CONFIG_IMPORT: configserver:http://sashizu.apps.internal:8080
       MUSUBI_BROKER_USERNAME: musubi
-      MUSUBI_BROKER_PASSWORD: musubi-dev-secret
-      MUSUBI_POSTGRESQL_PASSWORD: kansei
-      MUSUBI_RABBITMQ_PASSWORD: kansei
+      MUSUBI_BROKER_PASSWORD: ((musubi_broker_password))
+      MUSUBI_POSTGRESQL_PASSWORD: ((musubi_postgresql_password))
+      MUSUBI_RABBITMQ_PASSWORD: ((musubi_rabbitmq_password))
+      MUSUBI_GARAGE_RUN_ARTIFACTS_ACCESS_KEY: ((garage_run_artifacts_access_key))
+      MUSUBI_GARAGE_RUN_ARTIFACTS_SECRET_KEY: ((garage_run_artifacts_secret_key))
+      MUSUBI_GARAGE_BROWSER_EVIDENCE_ACCESS_KEY: ((garage_browser_evidence_access_key))
+      MUSUBI_GARAGE_BROWSER_EVIDENCE_SECRET_KEY: ((garage_browser_evidence_secret_key))
+      MUSUBI_GARAGE_BACKUPS_ACCESS_KEY: ((garage_backups_access_key))
+      MUSUBI_GARAGE_BACKUPS_SECRET_KEY: ((garage_backups_secret_key))
