@@ -26,6 +26,7 @@ public record MusubiServicesProperties(
         credentials.put(LGTM_SERVICE_ID, lgtm.credentials());
         if (garage != null) {
             credentials.put(GARAGE_SERVICE_ID + ":" + GARAGE_RUN_ARTIFACTS_PLAN_ID, garage.credentials(garage.runArtifacts()));
+            credentials.put(GARAGE_SERVICE_ID + ":" + GARAGE_WORK_ARTIFACTS_PLAN_ID, garage.credentials(garage.workArtifacts()));
             credentials.put(GARAGE_SERVICE_ID + ":" + GARAGE_BROWSER_EVIDENCE_PLAN_ID, garage.credentials(garage.browserEvidence()));
             credentials.put(GARAGE_SERVICE_ID + ":" + GARAGE_ENCRYPTED_BACKUPS_PLAN_ID, garage.credentials(garage.encryptedBackups()));
         }
@@ -75,7 +76,7 @@ public record MusubiServicesProperties(
         }
     }
 
-    public record Garage(String endpoint, String region, Bucket runArtifacts, Bucket browserEvidence,
+    public record Garage(String endpoint, String region, Bucket runArtifacts, Bucket workArtifacts, Bucket browserEvidence,
                          Bucket encryptedBackups) {
         Map<String,Object> credentials(Bucket bucket) {
             return Map.of("endpoint", endpoint, "region", region, "bucket", bucket.name(),

@@ -21,6 +21,7 @@ public class MusubiCatalog {
     public static final String LGTM_PLAN_ID = "ad1ce5ff-de74-493c-b0b1-653fe368bc23";
     public static final String GARAGE_SERVICE_ID = "0d710b3a-7c33-4f0a-9804-f62dbc9797c9";
     public static final String GARAGE_RUN_ARTIFACTS_PLAN_ID = "5376aebd-5db3-49ec-bada-b3e896011b81";
+    public static final String GARAGE_WORK_ARTIFACTS_PLAN_ID = "1edcf2ef-e477-4428-a1da-a4cd1c743bbe";
     public static final String GARAGE_BROWSER_EVIDENCE_PLAN_ID = "2889a6ee-bceb-494c-a1c2-289dc81303cd";
     public static final String GARAGE_ENCRYPTED_BACKUPS_PLAN_ID = "46d72de0-0bd6-4e22-b9b3-41ab56af053c";
 
@@ -45,6 +46,7 @@ public class MusubiCatalog {
                 .description("Garage S3-compatible encrypted artifact storage").bindable(true)
                 .tags("garage", "s3", "object-storage")
                 .plans(garagePlan(GARAGE_RUN_ARTIFACTS_PLAN_ID, "run-artifacts", "90-day run artifacts"),
+                        garagePlan(GARAGE_WORK_ARTIFACTS_PLAN_ID, "work-artifacts", "Encrypted Work review diffs"),
                         garagePlan(GARAGE_BROWSER_EVIDENCE_PLAN_ID, "browser-evidence", "Seven-day browser evidence"),
                         garagePlan(GARAGE_ENCRYPTED_BACKUPS_PLAN_ID, "encrypted-backups", "Encrypted recovery backups"))
                 .build();

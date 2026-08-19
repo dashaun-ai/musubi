@@ -21,7 +21,7 @@ class MusubiCatalogTest {
                 });
         assertThat(catalog.getServiceDefinitions().getLast().getPlans())
                 .extracting(plan -> plan.getName())
-                .containsExactly("run-artifacts", "browser-evidence", "encrypted-backups");
+                .containsExactly("run-artifacts", "work-artifacts", "browser-evidence", "encrypted-backups");
     }
 
     @Test

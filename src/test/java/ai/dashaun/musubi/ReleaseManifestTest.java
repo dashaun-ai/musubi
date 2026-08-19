@@ -17,6 +17,8 @@ class ReleaseManifestTest {
 				"MUSUBI_BROKER_PASSWORD: ((musubi_broker_password))",
 				"MUSUBI_GARAGE_RUN_ARTIFACTS_ACCESS_KEY: ((garage_run_artifacts_access_key))",
 				"MUSUBI_GARAGE_RUN_ARTIFACTS_SECRET_KEY: ((garage_run_artifacts_secret_key))",
+				"MUSUBI_GARAGE_WORK_ARTIFACTS_ACCESS_KEY: ((garage_work_artifacts_access_key))",
+				"MUSUBI_GARAGE_WORK_ARTIFACTS_SECRET_KEY: ((garage_work_artifacts_secret_key))",
 				"MUSUBI_GARAGE_BROWSER_EVIDENCE_ACCESS_KEY: ((garage_browser_evidence_access_key))",
 				"MUSUBI_GARAGE_BROWSER_EVIDENCE_SECRET_KEY: ((garage_browser_evidence_secret_key))",
 				"MUSUBI_GARAGE_BACKUPS_ACCESS_KEY: ((garage_backups_access_key))",
